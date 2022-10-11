@@ -3,8 +3,11 @@ package com.java.houserent.view;
 //1-显示界面
 //2-接受用户输入
 //3-调用HouseService完成对房屋信息的各种操作
+
 //listHouse()方法-界面
 //调用HouseService.java中的list()方法
+
+
 
 import com.java.houserent.domain.House;
 import com.java.houserent.service.HouseService;
@@ -17,7 +20,45 @@ public class HouseView {
 
     //创建HouseService对象，设定size
     //对象<=>属性
-    private HouseService houseService = new HouseService(10);
+    private HouseService houseService = new HouseService(2);
+
+    //增
+    //addHouse()
+    //接收输入
+    //创建House对象
+    //调用HouseService.java的add()方法，将新对象加入数组
+    //类型：void ；不是House
+    //House对象的id属性为系统分配，用户不能输入，如QQ号/工号
+    public void addHouse() {
+        System.out.println("==========AddHouse==========");
+
+        System.out.print("姓名：");
+        String name = Utility.readString(30); //直接创建一个House对象的属性
+
+        System.out.print("电话：");
+        String phone = Utility.readString(30);
+
+        System.out.print("地址：");
+        String address = Utility.readString(20);
+
+        System.out.print("月租：");
+        int rent = Utility.readInt();
+
+        System.out.print("状态(Rented/NotRented)：");
+        String state = Utility.readString(30);
+
+        //创建一个新的House对象
+        House newHouse = new House(0, name, phone, address, rent, state);
+
+        //调用HouseService.java的add()方法
+        //添加newHouse对象
+        //并且返回boolean值，以用来显示是否添加成功
+        if(houseService.add(newHouse)) {
+            System.out.println("==========Add Successfully==========");
+        } else {
+            System.out.println("==========Add Failed==========");
+        }
+    }
 
     //listHouse()
     //显示房屋列表
@@ -55,7 +96,8 @@ public class HouseView {
             key = Utility.readChar();
             switch (key){
                 case '1' :
-                    System.out.println("新增");
+                    //System.out.println("新增");
+                    addHouse();
                     break;
                 case '2' :
                     System.out.println("查找");
