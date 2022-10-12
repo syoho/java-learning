@@ -11,6 +11,8 @@ package com.java.houserent;
 //4-类
 //5-对象
 //6-方法/种类
+//7- ==
+
 
 import com.java.houserent.view.HouseView;
 

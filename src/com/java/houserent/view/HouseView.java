@@ -60,6 +60,41 @@ public class HouseView {
         }
     }
 
+    //删
+    //delHouse()
+    //接收输入的House对象id
+    //调用HouseService的del()方法
+    public void delHouse() {
+
+        System.out.println("==========DeleteHouse==========");
+
+        System.out.print("请选择删除房屋的编号(-1则退出)：");
+        int delId = Utility.readInt();
+        if (delId == -1) {
+            System.out.println("==========Give Up To Delete==========");
+            return; //不用break ； return结束方法 ； void啥都不返回
+        }
+
+        //"请输入你的选择(Y/N): 请小心选择"
+        //Utility.readConfirmSelection()具有循环判断功能
+        //不输入Y/N无法走出该循环
+        char choice = Utility.readConfirmSelection();
+        if (choice == 'Y') {
+            //确定删除
+            //HouseService.del(delId);
+            if (houseService.del(delId)){
+                System.out.println("==========Delete Successfully==========");
+            }else {
+                System.out.println("==========Wrong ID, Delete Failed==========");
+            }
+
+        }else {
+            //放弃删除
+            System.out.println("==========Give Up To Delete==========");
+        }
+    }
+
+
     //listHouse()
     //显示房屋列表
     public void listHouse() {
@@ -103,7 +138,8 @@ public class HouseView {
                     System.out.println("查找");
                     break;
                 case '3' :
-                    System.out.println("删除");
+                    //System.out.println("删除");
+                    delHouse();
                     break;
                 case '4' :
                     System.out.println("修改");

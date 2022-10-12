@@ -27,6 +27,11 @@ public class HouseService {
     //记录当前的id自增长到哪个值
     private int idCounter = 1;
 
+
+
+
+
+
     //构造器
     //size前勿忘int
     public HouseService(int size){
@@ -73,6 +78,45 @@ public class HouseService {
             return true;
         }
     }
+
+    //删除方法
+    //根据HouseView输入的delId删除数组中的房屋对象
+    //del()
+    //返回boolean值
+    public boolean del(int delId) {
+
+        //获得删除房源对象所在数组中的下标
+        //通过判断delId对应的index，来判断是否有这个需要删除的房源
+        int index = -1;
+        for (int i = 0; i < houseNums; i++) {
+            if(delId == houses[i].getId()) {
+                index = i; //获取成功
+            }
+        }
+
+        //delId在数组中不存在
+        if (index == -1) {
+            return false; //因为这个方法设定为返回boolean
+        }
+
+        //delId在数组中存在
+        //houseNums-1 ： 需要替换index+1下标位置的对象 ，不能使index循环到houseNums/houseNums-1
+        for (int i = index; i < houseNums - 1; i++){
+            houses[index] = houses[index + 1];
+        }
+
+        //数组最后一位变null
+        //数组长度也要减小；如果不减小，则长度不变，实际却空了一位，会影响添加房屋信息的程序add()
+        //简约写法：houses[--houseNums] = null;
+        houses[houseNums-1] = null;
+        houseNums--;
+
+        return true;
+    }
+
+
+
+
 
 
     //显示
