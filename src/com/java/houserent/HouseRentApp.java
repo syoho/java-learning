@@ -12,7 +12,9 @@ package com.java.houserent;
 //5-对象
 //6-方法/种类
 //7- ==
-
+//8-.var
+//9-break
+//10-toString()
 
 import com.java.houserent.view.HouseView;
 

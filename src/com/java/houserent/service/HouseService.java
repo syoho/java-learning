@@ -114,6 +114,21 @@ public class HouseService {
         return true;
     }
 
+    //查
+    //findById()方法
+    //返回House对象，或者null
+    //传入查询房源信息的id，来自HouseView.java的findHouse()方法
+    //return null居然要写在 for循环外面
+    public House findById(int findId){
+        int index;
+        for (int i = 0; i < houseNums; i++) {
+            if (findId == houses[i].getId()) {
+                //index = i;
+                return houses[i];
+            }
+        }
+        return null;
+    }
 
 
 
@@ -125,5 +140,7 @@ public class HouseService {
     public House[] list(){
         return houses;
     }
+
+
 
 }

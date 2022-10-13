@@ -94,6 +94,33 @@ public class HouseView {
         }
     }
 
+    //改
+    //updateHouse()
+    //接收
+
+
+    //查询
+    //findHouse()
+    //接收输入的需要查询的房屋信息id
+    //调用HouseService.java中的find()方法
+    public void findHouse() {
+
+        System.out.println("==========FindHouse==========");
+
+        System.out.print("请输入需要查找房屋的id：");
+        int findId = Utility.readInt();
+
+        House house = houseService.findById(findId);
+
+        if (house != null) {
+            System.out.println("编号\t\t房主\t\t电话\t\t地址\t\t月租\t\t状态(Rented/NotRented)");
+            System.out.println(house);
+        } else {
+            System.out.println("Not Found");
+        }
+    }
+
+
 
     //listHouse()
     //显示房屋列表
@@ -115,6 +142,14 @@ public class HouseView {
         System.out.println("==========End==========");
     }
 
+    //退出确认
+    //调用Utility
+    public void exit() {
+        char c = Utility.readConfirmSelection();
+        if (c == 'Y') {
+            loop = false;
+        }
+    }
 
     //显示主菜单
     public void mainMenu() {
@@ -135,7 +170,8 @@ public class HouseView {
                     addHouse();
                     break;
                 case '2' :
-                    System.out.println("查找");
+                    //System.out.println("查找");
+                    findHouse();
                     break;
                 case '3' :
                     //System.out.println("删除");
@@ -149,8 +185,9 @@ public class HouseView {
                     listHouse();
                     break;
                 case '6' :
-                    System.out.println("退出");
-                    loop = false;
+                    //System.out.println("退出");
+                    //loop = false;
+                    exit();
                     break;
             }
         } while (loop);
