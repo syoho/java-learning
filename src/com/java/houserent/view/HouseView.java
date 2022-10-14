@@ -96,12 +96,78 @@ public class HouseView {
 
     //改
     //updateHouse()
-    //接收
+    //接收输入的需要修改的房屋对象id
+    //居然可以复用findById
+    //不需要在HouseService.java中增加updata()方法
+    public void updateHouse() {
 
+        System.out.println("==========UpdateHouse==========");
+
+        System.out.print("请输入需要修改房屋的id(-1表示退出)：");
+        int updateId = Utility.readInt();
+        if (updateId == -1) {
+            System.out.println("==========Give Up To Update==========");
+            return;
+        }
+
+        //获取House对象
+        //返回的是引用类型[]，即数组的元素
+        //house.setXxx()，会直接影响HouseService中houses数组的元素
+        //可以通过set方法直接修改
+        House house = houseService.findById(updateId);
+
+        //对象为空判断
+        //不能忘记 return
+        if (house == null) {
+            System.out.println("Not Found");
+            return;
+        }
+
+        //非空操作
+        System.out.print("姓名("+house.getName()+")：");
+        String name = Utility.readString(30,house.getName()); //如果不改信息，则需要赋予一个默认值
+        if (!house.getName().equals(name)) {
+            house.setName(name);
+        }
+
+        System.out.print("电话("+house.getPhone()+")：");
+        String phone = Utility.readString(30,house.getPhone()); //如果不改信息，则需要赋予一个默认值
+        if (!house.getPhone().equals(phone)) {
+            house.setPhone(phone);
+        }
+
+        System.out.print("地址("+house.getAddress()+")：");
+        String address = Utility.readString(30,house.getAddress()); //如果不改信息，则需要赋予一个默认值
+        if (!house.getAddress().equals(address)) {
+            house.setAddress(address);
+        }
+
+        System.out.print("租金("+house.getRent()+")：");
+        int rent = Utility.readInt(-1); //没有输入，则赋值-1
+        if (rent != -1) {
+            house.setRent(rent); //为什么没有输入，赋值-1，原数值可以保持不变
+        }
+
+        /* //输入空格时，有Bug
+        int rent = house.getRent();
+        int newRent = Utility.readInt(); //如果不改信息，则需要赋予一个默认值
+        if (newRent != rent) {
+            house.setRent(newRent);
+        }*/
+
+
+        System.out.print("状态("+house.getState()+")：");
+        String state = Utility.readString(30,house.getState()); //如果不改信息，则需要赋予一个默认值
+        if (!house.getState().equals(state)) {
+            house.setState(state);
+        }
+
+        System.out.println("==========Update Successfully==========");
+    }
 
     //查询
     //findHouse()
-    //接收输入的需要查询的房屋信息id
+    //接收输入的需要查询的房屋对象id
     //调用HouseService.java中的find()方法
     public void findHouse() {
 
@@ -178,7 +244,8 @@ public class HouseView {
                     delHouse();
                     break;
                 case '4' :
-                    System.out.println("修改");
+                    //System.out.println("修改");
+                    updateHouse();
                     break;
                 case '5' :
                     //System.out.println("显示");
